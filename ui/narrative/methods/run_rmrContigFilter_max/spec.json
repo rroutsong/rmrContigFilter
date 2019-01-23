@@ -54,7 +54,10 @@
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",
-                    "target_property": "output_workspace"
+                    "target_property": "workspace_name"
+                },{
+                    "narrative_system_variable": "workspace_id",
+                    "target_property": "workspace_id"
                 },{
                     "input_parameter": "assembly_input_ref",
                     "target_property": "assembly_input_ref",
@@ -83,7 +86,7 @@
                 },
                 {
                     "narrative_system_variable": "workspace",
-                    "target_property": "ws"
+                    "target_property": "output_ws"
                 }
             ]
         }
