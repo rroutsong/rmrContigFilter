@@ -9,6 +9,7 @@ from Bio import SeqIO
 
 from installed_clients.AssemblyUtilClient import AssemblyUtil
 from installed_clients.KBaseReportClient import KBaseReport
+from installed_clients.DataFileUtilClient import DataFileUtil
 #END_HEADER
 
 
@@ -118,6 +119,40 @@ This sample module contains one small method that filters contigs.
                                                               'workspace_name': workspace_name,
                                                               'assembly_name': fasta_file['assembly_name']
                                                               })
+
+        # Step 4b - Build html report
+        # create html string
+        # write string to file to self.shared_folder
+        # upload to shock
+        # send to report
+
+        html_header = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>title</title></head><body><table>"
+        html_footer = "</table></body></html>"
+
+        tableentries = "<tr><th>ID</th><th>A %</th><th>C %</th><th>T %</th><th>G %</th></tr>"
+        for contig in good_contigs:
+            Acount = contig.seq.upper().count('A')
+            Ccount = contig.seq.upper().count('C')
+            Tcount = contig.seq.upper().count('T')
+            Gcount = contig.seq.upper().count('G')
+            total = Acount + Ccount + Tcount + Gcount
+            print(contig.seq.upper())
+
+            Aper = 100*(Acount/total)
+            Cper = 100*(Ccount/total)
+            Gper = 100*(Gcount/total)
+            Tper = 100*(Tcount/total)
+
+            tmprow = "<tr><td>"+str(Aper)+"</td><td>"+str(Cper)+"</td><td>"+str(Tper)+"</td><td>"+str(Gper)+"</td></tr>"
+
+            tableentries += tmprow
+
+        html_str = html_header + tableentries + html_footer
+
+        html_file_path = os.path.join(self.shared_folder, 'output_table.html')
+        html_file = open(html_file_path, "w")
+        html_file.write(html_str)
+        html_file.close()
 
 
         # Step 5 - Build a Report and return
@@ -273,7 +308,7 @@ This sample module contains one small method that filters contigs.
         # return [output]
 
         # return the new assembly and some plain text
-        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref']}
+        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref'], 'workspace_name': report_info["workspace_name"}
 
     def status(self, ctx):
         #BEGIN_STATUS
