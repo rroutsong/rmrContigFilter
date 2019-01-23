@@ -86,7 +86,7 @@
                 },
                 {
                     "narrative_system_variable": "workspace",
-                    "target_property": "output_ws"
+                    "target_property": "workspace_name"
                 }
             ]
         }

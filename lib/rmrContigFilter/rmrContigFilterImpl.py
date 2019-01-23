@@ -136,14 +136,13 @@ This sample module contains one small method that filters contigs.
             Tcount = contig.seq.upper().count('T')
             Gcount = contig.seq.upper().count('G')
             total = Acount + Ccount + Tcount + Gcount
-            print(contig.seq.upper())
 
             Aper = 100*(Acount/total)
             Cper = 100*(Ccount/total)
             Gper = 100*(Gcount/total)
             Tper = 100*(Tcount/total)
 
-            tmprow = "<tr><td>"+str(Aper)+"</td><td>"+str(Cper)+"</td><td>"+str(Tper)+"</td><td>"+str(Gper)+"</td></tr>"
+            tmprow = "<tr><td>"+contig.id+"</td><td>"+str(Aper)+"</td><td>"+str(Cper)+"</td><td>"+str(Tper)+"</td><td>"+str(Gper)+"</td></tr>"
 
             tableentries += tmprow
 
@@ -304,7 +303,7 @@ This sample module contains one small method that filters contigs.
         #reportObj = {
         #    'objects_created': [{'ref': new_assembly, 'description': 'Filtered contigs'}],
         #    'text_message': 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total)
-        #    }
+        #}
 
         # This is the old plain text report, we need report.create_extended_report for our new output
         # report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
