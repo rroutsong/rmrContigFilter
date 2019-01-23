@@ -147,31 +147,66 @@ This sample module contains one small method that filters contigs.
 
             tableentries += tmprow
 
+        # Create the html string
         html_str = html_header + tableentries + html_footer
 
-        html_file_path = os.path.join(self.shared_folder, 'output_table.html')
+        # Write the html string to a file in the shared folder
+        html_file_dir = os.path.join(self.shared_folder, 'html')
+        if not os.path.isdir(html_file_dir):
+            os.mkdir(html_file_dir)
+        html_file_path = os.path.join(html_file_dir, 'output_table.html')
         html_file = open(html_file_path, "w")
         html_file.write(html_str)
         html_file.close()
 
+        """
+        Will try to not use shock first
+        # Upload the html file to shock
+        dfu = DataFileUtil(self.callback_url)
+
+        try:
+            shock_html_upload = dfu.file_to_shock({'file_path': html_file_dir, 'make_handle': 0, 'pack':'zip'})
+        except:
+            raise ValueError('Unable to upload html file to shock with DataFileUtil')
+        """
 
         # Step 5 - Build a Report and return
+        """
+        Old Report .create method:
+        https://github.com/kbaseapps/KBaseReportPy/blob/master/lib/KBaseReportPy/KBaseReportPyImpl.py
+
         reportObj = {
             'objects_created': [{'ref': new_assembly, 'description': 'Filtered contigs'}],
             'text_message': 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total)
         }
         report = KBaseReport(self.callback_url)
         report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
+        """
 
+        # New report .create_extended_report
+        reportObj = {
+                'objects_created': [{'ref': new_assembly, 'description': 'Filtered contigs'}],
+                'message': 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total),
+                'direct_html': None,
+                'direct_html_link_index': 0,
+                'file_links': [],
+                #'html_links': [{'shock-id': shock_html_upload['shock_id'], 'name': 'output-table.html', 'label': 'contig table'}],
+                'html_links': [{'path': html_file_dir, 'name': 'output_table.html', 'description': 'HTML report for contig filtering' }],
+                'workspace_name': params['workspace_name'],
+        }
+
+        report = KBaseReport(self.callback_url)
+        report_info = report.create_extended_report(reportObj)
 
         # STEP 6: contruct the output to send back
-        output = {'report_name': report_info['name'],
+        output = {
+                  'report_name': report_info['name'],
                   'report_ref': report_info['ref'],
                   'assembly_output': new_assembly,
                   'n_initial_contigs': n_total,
                   'n_contigs_removed': n_total - n_remaining,
                   'n_contigs_remaining': n_remaining
-                  }
+        }
         logging.info('returning:' + pformat(output))
 
         #END run_rmrContigFilter
@@ -308,7 +343,7 @@ This sample module contains one small method that filters contigs.
         # return [output]
 
         # return the new assembly and some plain text
-        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref'], 'workspace_name': report_info["workspace_name"}
+        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref'], 'workspace_name': report_info["workspace_name"]}
 
     def status(self, ctx):
         #BEGIN_STATUS
