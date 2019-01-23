@@ -228,23 +228,40 @@ This sample module contains one small method that filters contigs.
 
 
         # Step 5 - Build a Report and return
-        reportObj = {
-            'objects_created': [{'ref': new_assembly, 'description': 'Filtered contigs'}],
-            'text_message': 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total)
-        }
         report = KBaseReport(self.callback_url)
-        report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
-        #print(params['min_length'], params['max_length'])
+
+        # This is the old plain text report given in the SDK tutorial
+        #reportObj = {
+        #    'objects_created': [{'ref': new_assembly, 'description': 'Filtered contigs'}],
+        #    'text_message': 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total)
+        #    }
+
+        # This is the old plain text report, we need report.create_extended_report for our new output
+        # report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
 
         # STEP 6: contruct the output to send back
+
+        # We want to output the new assembly in an assembly viewer, to show the dynamic table
+        # associated with the new assembly. We also want to keep our report text.
+
+        report_info = report.create_extended_report({
+            "message": 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total),
+            "objects_created": [{'ref': new_assembly, 'description': 'Filtered contigs'}],
+            "workspace_name": params['workspace_name'],
+        })
+
         output = {'report_name': report_info['name'],
-                  'report_ref': report_info['ref'],
-                  'assembly_output': new_assembly,
-                  'n_initial_contigs': n_total,
-                  'n_contigs_removed': n_total - n_remaining,
-                  'n_contigs_remaining': n_remaining
-                 }
+                   'report_ref': report_info['ref'],
+                   'output_assembly_ref': new_assembly,
+                   'n_initial_contigs': n_total,
+                   'n_contigs_removed': n_total - n_remaining,
+                   'n_contigs_remaining': n_remaining
+                  }
+
         logging.info('returning:' + pformat(output))
+
+        # This will print the ref # to the new assembly created from the filter
+        # print("\n\nNEW ASSEMBLY: "+new_assembly+"\n\n")
 
         #END run_rmrContigFilter_max
 
@@ -252,8 +269,11 @@ This sample module contains one small method that filters contigs.
         if not isinstance(output, dict):
             raise ValueError('Method run_rmrContigFilter_max return value ' +
                              'output is not type dict as required.')
-        # return the results
+        # return the old plain text results
         return [output]
+
+        # return the new assembly and some plain text
+        # return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref']}
 
     def status(self, ctx):
         #BEGIN_STATUS

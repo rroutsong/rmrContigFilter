@@ -98,7 +98,7 @@ class rmrContigFilterTest(unittest.TestCase):
             'max_length': 1000000
         })
 
-        self.assertTrue(len(result[0]['assembly_output']))
+        self.assertTrue(len(result[0]['output_assembly_ref']))
         self.assertTrue(len(result[0]['report_name']))
         self.assertTrue(len(result[0]['report_ref']))
 
