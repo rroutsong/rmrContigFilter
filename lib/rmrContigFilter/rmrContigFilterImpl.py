@@ -270,10 +270,10 @@ This sample module contains one small method that filters contigs.
             raise ValueError('Method run_rmrContigFilter_max return value ' +
                              'output is not type dict as required.')
         # return the old plain text results
-        return [output]
+        # return [output]
 
         # return the new assembly and some plain text
-        # return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref']}
+        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref']}
 
     def status(self, ctx):
         #BEGIN_STATUS
