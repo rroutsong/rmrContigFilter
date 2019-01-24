@@ -101,7 +101,7 @@
 					"target_property": "id"
 				},
                 {
-                    "narrative_system_variable": "workspace",
+                    "narrative_system_variable": "workspace_id",
                     "target_property": "ws"
                 }
             ]
