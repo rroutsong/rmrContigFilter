@@ -30,8 +30,8 @@ This sample module contains one small method that filters contigs.
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = "https://github.com/rroutsong/rmrContigFilter.git"
-    GIT_COMMIT_HASH = "1614e8180c09618aa0f3740b3f41795e0d824df8"
+    GIT_URL = ""
+    GIT_COMMIT_HASH = ""
 
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
@@ -221,8 +221,7 @@ This sample module contains one small method that filters contigs.
         """
         New app which filters contigs in an assembly using both a minimum and a maximum contig length
         :param params: instance of mapping from String to unspecified object
-        :returns: instance of type "ReportResultsmax" -> structure: parameter
-           "output_assembly_ref" of type "assembly_ref", parameter
+        :returns: instance of type "ReportResults" -> structure: parameter
            "report_name" of String, parameter "report_ref" of String
         """
         # ctx is the context object
@@ -339,8 +338,12 @@ This sample module contains one small method that filters contigs.
         if not isinstance(output, dict):
             raise ValueError('Method run_rmrContigFilter_max return value ' +
                              'output is not type dict as required.')
-        # return the results
-        return [output]
+        # return the old plain text results
+        # return [output]
+
+        # return the new assembly and some plain text
+        return {"output_assembly_ref": new_assembly, "report_name": report_info['name'], 'report_ref': report_info['ref']}
+
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",
