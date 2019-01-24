@@ -142,7 +142,7 @@ This sample module contains one small method that filters contigs.
             Gper = 100*(Gcount/total)
             Tper = 100*(Tcount/total)
 
-            tmprow = "<tr><td>"+contig.id+"</td><td>"+str(Aper)+"</td><td>"+str(Cper)+"</td><td>"+str(Tper)+"</td><td>"+str(Gper)+"</td></tr>"
+            tmprow = "<tr><td>"+contig.id+"</td><td>"+str(round(Aper,2))+"</td><td>"+str(round(Cper,2))+"</td><td>"+str(round(Tper,2))+"</td><td>"+str(round(Gper,2))+"</td></tr>"
 
             tableentries += tmprow
 
