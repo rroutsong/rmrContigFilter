@@ -41,6 +41,11 @@ parameters :
          ui-name : |
              Max Length Threshold
          short-hint : |
-             All contigs above this length will be remove
+             All contigs above this length will be removed
+    output_assembly_name :
+        ui-name : |
+            Name for new assembly object
+        short-hint : |
+            Newly filtered assembly will be created with this name.
 description : |
     <p>This is a simple method designed to illustrate the KBase SDK.</p>

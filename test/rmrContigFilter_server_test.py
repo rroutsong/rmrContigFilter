@@ -76,7 +76,7 @@ class rmrContigFilterTest(unittest.TestCase):
 
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
-    def test_run_rmrContigFilter_ok(self):
+    def my_test_run_rmrContigFilter_ok(self):
         # call your implementation
         ret = self.serviceImpl.run_rmrContigFilter(self.ctx,
                                                 {'workspace_name': self.wsName,
@@ -89,36 +89,37 @@ class rmrContigFilterTest(unittest.TestCase):
         self.assertEqual(ret[0]['n_contigs_removed'], 1)
         self.assertEqual(ret[0]['n_contigs_remaining'], 2)
 
-    def test_run_rmrContigFilter_max_ok(self):
+    def my_test_run_rmrContigFilter_max_ok(self):
         ref = "79/16/1"
         result = self.serviceImpl.run_rmrContigFilter_max(self.ctx, {
             'workspace_name': self.wsName,
             'assembly_input_ref': ref,
             'min_length': 100,
-            'max_length': 1000000
+            'max_length': 1000000,
+            'output_assembly_name': 'test_assembly'
         })
 
-        self.assertTrue(len(result[0]['output_assembly_ref']))
+        self.assertTrue(len(result[0]['output_assembly_name']))
         self.assertTrue(len(result[0]['report_name']))
         self.assertTrue(len(result[0]['report_ref']))
 
         print(result)
 
-    def test_run_rmrContigFilter_min_len_negative(self):
+    def my_test_run_rmrContigFilter_min_len_negative(self):
         with self.assertRaisesRegex(ValueError, 'min_length parameter cannot be negative'):
             self.serviceImpl.run_rmrContigFilter(self.ctx,
                                               {'workspace_name': self.wsName,
                                                'assembly_input_ref': '1/fake/3',
                                                'min_length': '-10'})
 
-    def test_run_rmrContigFilter_min_len_parse(self):
+    def my_test_run_rmrContigFilter_min_len_parse(self):
         with self.assertRaisesRegex(ValueError, 'Cannot parse integer from min_length parameter'):
             self.serviceImpl.run_rmrContigFilter(self.ctx,
                                               {'workspace_name': self.wsName,
                                                'assembly_input_ref': '1/fake/3',
                                                'min_length': 'ten'})
 
-    def test_run_rmrContigFilter_max_len_negative(self):
+    def my_test_run_rmrContigFilter_max_len_negative(self):
          with self.assertRaisesRegex(ValueError, 'max_length parameter cannot be negative'):
              self.serviceImpl.run_rmrContigFilter_max(self.ctx,
                                                {'workspace_name': self.wsName,
@@ -126,7 +127,7 @@ class rmrContigFilterTest(unittest.TestCase):
                                                 'max_length': '-10',
                                                 'min_length': '1'})
 
-    def test_run_rmrContigFilter_max_len_parse(self):
+    def my_test_run_rmrContigFilter_max_len_parse(self):
          with self.assertRaisesRegex(ValueError, 'Cannot parse integer from max_length parameter'):
              self.serviceImpl.run_rmrContigFilter_max(self.ctx,
                                                {'workspace_name': self.wsName,
@@ -134,7 +135,7 @@ class rmrContigFilterTest(unittest.TestCase):
                                                 'max_length': 'ten',
                                                 'min_length': '1'})
 
-    def test_run_rmrContifFilter_max_lt_min_(self):
+    def my_test_run_rmrContifFilter_max_lt_min_(self):
          with self.assertRaisesRegex(ValueError, 'max_length cannot be less than or equal to min_length'):
              self.serviceImpl.run_rmrContigFilter_max(self.ctx,
                                                {'workspace_name': self.wsName,

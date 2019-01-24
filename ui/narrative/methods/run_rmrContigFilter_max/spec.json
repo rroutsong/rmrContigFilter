@@ -44,7 +44,19 @@
                  "validate_as": "int",
                  "min_integer" : 0
              }
-         }
+         },
+		 {
+            "id": "output_assembly_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types" : [ "KBaseGenomeAnnotations.Assembly" ],
+                "is_output_name":true
+        	}
+        }
     ],
     "behavior": {
         "service-mapping": {
@@ -66,6 +78,10 @@
                     "input_parameter": "min_length",
                     "target_property": "min_length"
                 },
+				{
+					"input_parameter": "output_assembly_name",
+					"target_property": "output_assembly_name"
+				},
                 {
                      "input_parameter": "max_length",
                      "target_property": "max_length"
@@ -80,9 +96,13 @@
                     "service_method_output_path": [0,"report_ref"],
                     "target_property": "report_ref"
                 },
+				{
+					"input_parameter": "output_assembly_name",
+					"target_property": "id"
+				},
                 {
                     "narrative_system_variable": "workspace",
-                    "target_property": "workspace_name"
+                    "target_property": "ws"
                 }
             ]
         }

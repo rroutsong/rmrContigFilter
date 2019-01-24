@@ -293,7 +293,8 @@ This sample module contains one small method that filters contigs.
         logging.info('Uploading filtered Assembly data.')
         new_assembly = assemblyUtil.save_assembly_from_fasta({'file': {'path': filtered_fasta_file},
                                                               'workspace_name': workspace_name,
-                                                              'assembly_name': fasta_file['assembly_name']
+                                                              #'assembly_name': fasta_file['assembly_name']
+                                                              'assembly_name': params['output_assembly_name']
                                                              })
 
 
@@ -322,7 +323,7 @@ This sample module contains one small method that filters contigs.
 
         output = {'report_name': report_info['name'],
                    'report_ref': report_info['ref'],
-                   'output_assembly_ref': new_assembly,
+                   'output_assembly_name': params["output_assembly_name"],
                    'n_initial_contigs': n_total,
                    'n_contigs_removed': n_total - n_remaining,
                    'n_contigs_remaining': n_remaining
