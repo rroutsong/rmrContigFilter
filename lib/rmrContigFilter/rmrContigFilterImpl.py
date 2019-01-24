@@ -241,6 +241,9 @@ This sample module contains one small method that filters contigs.
         if 'workspace_name' not in params:
             raise ValueError('Parameter workspace_name is not set in input arguments')
         workspace_name = params['workspace_name']
+        if 'workspace_id' not in params:
+            print(params)
+            raise ValueError('Parameter workspace_id is not set in input arguments')
         if 'assembly_input_ref' not in params:
             raise ValueError('Parameter assembly_input_ref is not set in input arguments')
         assembly_input_ref = params['assembly_input_ref']
@@ -318,17 +321,20 @@ This sample module contains one small method that filters contigs.
         report_info = report.create_extended_report({
             "message": 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total),
             "objects_created": [{'ref': new_assembly, 'description': 'Filtered contigs'}],
-            "ws": params['workspace_name'],
+            "workspace_id": params['workspace_id'],
+            "workspace_name": params['workspace_name']
         })
 
-        output = {'report_name': report_info['name'],
-                   'report_ref': report_info['ref'],
-                   'output_assembly_name': params["output_assembly_name"],
-                   #'n_initial_contigs': n_total,
-                   #'n_contigs_removed': n_total - n_remaining,
-                   #'n_contigs_remaining': n_remaining,
-                   'ws': params['workspace_name']
-                  }
+        output = {
+                    'report_name': report_info['name'],
+                    'report_ref': report_info['ref'],
+                    'output_assembly_name': params["output_assembly_name"],
+                    #'n_initial_contigs': n_total,
+                    #'n_contigs_removed': n_total - n_remaining,
+                    #'n_contigs_remaining': n_remaining,
+                    'workspace_id': params['workspace_id'],
+                    'workspace_name': params['workspace_name']
+        }
 
         logging.info('returning:' + pformat(output))
 
