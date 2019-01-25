@@ -235,7 +235,7 @@ This sample module contains one small method that filters contigs.
         #BEGIN run_rmrContigFilter_max
 
         # Print statements to stdout/stderr are captured and available as the App log
-        logging.info('Starting run_rmrContigFilter function. Params=' + pformat(params))
+        logging.info('Starting run_rmrContigFilter_max function. Params=' + pformat(params))
 
         # Step 1 - Parse/examine the parameters and catch any errors
         # It is important to check that parameters exist and are defined, and that nice error
