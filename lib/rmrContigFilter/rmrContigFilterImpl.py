@@ -325,6 +325,8 @@ This sample module contains one small method that filters contigs.
             "workspace_name": params['workspace_name']
         })
 
+        logging.info('workspace info: '+ params['workspace_name'])
+
         output = {
                     'report_name': report_info['name'],
                     'report_ref': report_info['ref'],
