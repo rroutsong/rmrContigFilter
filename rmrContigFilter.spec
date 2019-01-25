@@ -14,6 +14,7 @@ module rmrContigFilter {
 	typedef structure {
 		string output_workspace;
 		data_obj_ref assembly_input_ref;
+		string output_assembly_name;
 		int min_length;
 		int max_length;
     	string report_ref;

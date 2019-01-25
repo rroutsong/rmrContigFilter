@@ -31,7 +31,7 @@ This sample module contains one small method that filters contigs.
     ######################################### noqa
     VERSION = "0.0.1"
     GIT_URL = "https://github.com/rroutsong/rmrContigFilter.git"
-    GIT_COMMIT_HASH = "04c8ba4f1a018f9bb5af3af451a93538f59d3ea9"
+    GIT_COMMIT_HASH = "c08daa297c202cf995f7258cdb70ab4dff1d3e7a"
 
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
@@ -223,9 +223,8 @@ This sample module contains one small method that filters contigs.
         :param params: instance of type "rmrContigFiltermaxinput" ->
            structure: parameter "output_workspace" of String, parameter
            "assembly_input_ref" of type "data_obj_ref", parameter
-           "output_assembly_name" of String, parameter "min_length" of Long,
-           parameter "max_length" of Long, parameter "report_ref" of String,
-           parameter "report_name" of String
+           "min_length" of Long, parameter "max_length" of Long, parameter
+           "report_ref" of String, parameter "report_name" of String
         :returns: instance of type "ReportResultsmax" -> structure: parameter
            "output_assembly_ref" of type "assembly_ref", parameter
            "report_name" of String, parameter "report_ref" of String

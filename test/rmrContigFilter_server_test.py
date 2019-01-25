@@ -76,6 +76,7 @@ class rmrContigFilterTest(unittest.TestCase):
 
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
+    """
     def test_run_rmrContigFilter_ok(self):
         # call your implementation
         ret = self.serviceImpl.run_rmrContigFilter(self.ctx,
@@ -89,7 +90,7 @@ class rmrContigFilterTest(unittest.TestCase):
         self.assertEqual(ret[0]['n_initial_contigs'], 3)
         self.assertEqual(ret[0]['n_contigs_removed'], 1)
         self.assertEqual(ret[0]['n_contigs_remaining'], 2)
-
+    """
     def test_run_rmrContigFilter_max_ok(self):
         ref = "79/16/1"
         result = self.serviceImpl.run_rmrContigFilter_max(self.ctx, {
@@ -103,7 +104,7 @@ class rmrContigFilterTest(unittest.TestCase):
         self.assertTrue(len(result[0]['output_assembly_name']))
         self.assertTrue(len(result[0]['report_name']))
         self.assertTrue(len(result[0]['report_ref']))
-
+    """
     def test_run_rmrContigFilter_min_len_negative(self):
         with self.assertRaisesRegex(ValueError, 'min_length parameter cannot be negative'):
             self.serviceImpl.run_rmrContigFilter(self.ctx,
@@ -142,4 +143,4 @@ class rmrContigFilterTest(unittest.TestCase):
                                                 'assembly_input_ref': '1/fake/3',
                                                 'min_length': '20000',
                                                 'max_length': '1'})
-
+    """
