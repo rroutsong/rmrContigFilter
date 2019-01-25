@@ -332,8 +332,8 @@ This sample module contains one small method that filters contigs.
                     #'n_initial_contigs': n_total,
                     #'n_contigs_removed': n_total - n_remaining,
                     #'n_contigs_remaining': n_remaining,
-                    'workspace_id': params['workspace_id'],
-                    'workspace_name': params['workspace_name']
+                    #'workspace_id': params['workspace_id'],
+                    #'workspace_name': params['workspace_name']
         }
 
         logging.info('returning:' + pformat(output))
