@@ -9,6 +9,17 @@ module rmrContigFilter {
         string report_ref;
     } ReportResults;
 
+	typedef string data_obj_ref;
+	
+	typedef structure {
+		string output_workspace;
+		data_obj_ref assembly_input_ref;
+		int min_length;
+		int max_length;
+    	string report_ref;
+        string report_name;
+	} rmrContigFiltermaxinput;
+
 	typedef string assembly_ref;
 	
 	typedef structure {
@@ -25,5 +36,5 @@ module rmrContigFilter {
     /*
         New app which filters contigs in an assembly using both a minimum and a maximum contig length
     */
-    funcdef run_rmrContigFilter_max(mapping<string,UnspecifiedObject> params) returns (ReportResultsmax output) authentication required;
+    funcdef run_rmrContigFilter_max(rmrContigFiltermaxinput params) returns (ReportResultsmax output) authentication required;
 };
