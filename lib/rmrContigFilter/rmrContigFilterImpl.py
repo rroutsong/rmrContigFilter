@@ -238,12 +238,9 @@ This sample module contains one small method that filters contigs.
         # defined in a Narrative App, but advanced users or other SDK developers can call
         # this function directly, so validation is still important.
         logging.info('Validating parameters.')
-        if 'workspace_name' not in params:
-            raise ValueError('Parameter workspace_name is not set in input arguments')
-        workspace_name = params['workspace_name']
-        if 'workspace_id' not in params:
-            print(params)
+        if 'output_workspace' not in params:
             raise ValueError('Parameter workspace_id is not set in input arguments')
+        workspace_name = params['output_workspace']
         if 'assembly_input_ref' not in params:
             raise ValueError('Parameter assembly_input_ref is not set in input arguments')
         assembly_input_ref = params['assembly_input_ref']
@@ -322,10 +319,8 @@ This sample module contains one small method that filters contigs.
             "message": 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total),
             "objects_created": [{'ref': new_assembly, 'description': 'Filtered contigs'}],
             #"workspace_id": params['workspace_id'],
-            "workspace_name": params['workspace_name']
+            "workspace_name": params["output_workspace"]
         })
-
-        logging.info('workspace info: '+ params['workspace_name'])
 
         output = {
                     'report_name': report_info['name'],
@@ -335,7 +330,7 @@ This sample module contains one small method that filters contigs.
                     #'n_contigs_removed': n_total - n_remaining,
                     #'n_contigs_remaining': n_remaining,
                     #'workspace_id': params['workspace_id'],
-                    'workspace_name': params['workspace_name']
+                    #'workspace_id': report_info['ws_id']
         }
 
         logging.info('returning:' + pformat(output))
