@@ -7,7 +7,7 @@
     "categories": ["active"],
     "widgets": {
         "input": null,
-        "output": "kbaseAssemblyView"
+        "output": "kbaseGenomeAnnotationAssembly"
     },
     "parameters": [ 
         {
@@ -95,11 +95,11 @@
                 },
 				{
 					"input_parameter": "output_assembly_name",
-					"target_property": "ws_id"
+					"target_property": "objNameOrId"
 				},
 				{
                     "narrative_system_variable": "workspace",
-                    "target_property": "ws_name"
+                    "target_property": "wsNameOrId"
                 }
             ]
         }
