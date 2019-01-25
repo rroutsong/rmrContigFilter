@@ -6,7 +6,7 @@
     "contact": "https://kbase.us/contact-us/",
     "categories": ["active"],
     "widgets": {
-        "input": "kbaseNarrativeMethodInput",
+        "input": null,
         "output": "kbaseAssemblyView"
     },
     "parameters": [ 
@@ -95,11 +95,11 @@
                 },
 				{
 					"input_parameter": "output_assembly_name",
-					"target_property": "id"
+					"target_property": "ws_id"
 				},
 				{
                     "narrative_system_variable": "workspace",
-                    "target_property": "ws"
+                    "target_property": "ws_name"
                 }
             ]
         }
