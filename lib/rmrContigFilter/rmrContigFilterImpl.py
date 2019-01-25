@@ -321,7 +321,7 @@ This sample module contains one small method that filters contigs.
         report_info = report.create_extended_report({
             "message": 'Filtered Assembly to ' + str(n_remaining) + ' contigs out of ' + str(n_total),
             "objects_created": [{'ref': new_assembly, 'description': 'Filtered contigs'}],
-            "workspace_id": params['workspace_id'],
+            #"workspace_id": params['workspace_id'],
             "workspace_name": params['workspace_name']
         })
 
@@ -333,7 +333,7 @@ This sample module contains one small method that filters contigs.
                     #'n_contigs_removed': n_total - n_remaining,
                     #'n_contigs_remaining': n_remaining,
                     #'workspace_id': params['workspace_id'],
-                    #'workspace_name': params['workspace_name']
+                    'workspace_name': params['workspace_name']
         }
 
         logging.info('returning:' + pformat(output))

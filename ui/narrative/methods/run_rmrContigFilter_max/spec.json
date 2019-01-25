@@ -99,7 +99,11 @@
 				{
 					"input_parameter": "output_assembly_name",
 					"target_property": "id"
-				}
+				},
+				{
+                     "narrative_system_variable": "workspace",
+                     "target_property": "workspace_name"
+                }
             ]
         }
     },
