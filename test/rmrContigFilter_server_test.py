@@ -101,7 +101,7 @@ class rmrContigFilterTest(unittest.TestCase):
             'output_assembly_name': 'test_assembly'
         })
 
-        self.assertTrue(len(result[0]['output_assembly_name']))
+        self.assertTrue(len(result[0]['objNameOrId']))
         self.assertTrue(len(result[0]['report_name']))
         self.assertTrue(len(result[0]['report_ref']))
     """

@@ -24,7 +24,7 @@ module rmrContigFilter {
 	typedef string assembly_ref;
 	
 	typedef structure {
-		assembly_ref output_assembly_ref;
+		assembly_ref objNameOrId;
 		string report_name;
         string report_ref;
 	} ReportResultsmax;
